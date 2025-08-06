@@ -2,6 +2,7 @@
 
 This repository contains SQL queries for analyzing retail sales data. The queries are designed for MySQL and cover various aspects of data manipulation, cleaning, exploration, and business analysis.
 
+
 **Table of Contents**
 
 1. Project Overview
@@ -20,29 +21,39 @@ This repository contains SQL queries for analyzing retail sales data. The querie
 
 8. Contributing
 
+
 **Project Overview**
 
 This project focuses on performing a comprehensive analysis of retail sales data using SQL. It demonstrates fundamental SQL concepts, including Data Definition Language (DDL), Data Manipulation Language (DML), Data Query Language (DQL), and the use of advanced features like window functions and CTEs (Common Table Expressions). The goal is to extract meaningful insights from raw sales data to answer key business questions.
 
+
 **Features**
 
 Database and Table Creation: Scripts to set up the sql_project_P1 database and the retail_sales table.
+
 Data Cleaning: Queries to identify and check for NULL values across all columns.
+
 Data Exploration: Basic queries to understand the dataset's size, unique customers, and product categories.
+
 Business Analysis: A series of SQL queries designed to answer specific business questions related to sales performance, customer behavior, and operational shifts.
+
 MySQL Specific Syntax: All queries are tailored for MySQL, including date formatting (DATE_FORMAT) and time extraction (HOUR).
+
 
 **Database Setup**
 
 To set up the database and table, execute the following DDL statements in your MySQL client (e.g., MySQL Workbench, command-line client):
 
+
 -- Create Database
 
 '''Create Database sql_project_P1;'''
 
+
 -- Use the created database
 
 '''Use sql_project_P1;'''
+
 
 -- Create Table
 '''Create table retail_sales(
@@ -59,9 +70,11 @@ To set up the database and table, execute the following DDL statements in your M
     total_sales float
 );'''
 
+
 **Data Loading**
 
 This repository only provides the SQL queries for analysis. The retail_sales table is initially empty after creation. You will need to load your retail sales data into this table.
+
 
 **Assumptions:**
 
@@ -80,6 +93,7 @@ IGNORE 1 ROWS; -- Use this if your CSV has a header row
 
 Remember to replace /path/to/your/retail_sales_data.csv with the actual path to your data file.
 
+
 **Analysis Overview**
 
 The SQL script performs the following types of analysis:
@@ -96,6 +110,7 @@ Customer Behavior: Explores sales by gender and category, and identifies top cus
 
 Time-based Analysis: Calculates average sales per month, identifies best-selling months, and categorizes sales by time shifts (Morning, Afternoon, Evening).
 
+
 **Usage**
 
 To use these queries:
@@ -108,11 +123,14 @@ Load your data: Import your retail sales data into the retail_sales table.
 
 Execute queries: Copy and paste the desired queries from the retail_sales_analysis.sql file (or directly from the Key SQL Queries section below) into your MySQL client and execute them.
 
+
 **Key SQL Queries**
 
 Below are some of the key analytical queries included in the project, along with a brief description of what each query achieves.
 
+
 Data Overview and Cleaning
+
 
 Check Table Structure:
 
@@ -142,7 +160,9 @@ Where
     or cogs is null
     or total_sales is null;'''
 
+
 **Data Exploration**
+
 
 Count Unique Customers:
 
@@ -156,12 +176,15 @@ List Unique Categories:
 
 '''Select Distinct category from retail_sales;'''
 
+
 **Data Analysis & Business Questions**
+
 
 Que 1. Retrieve all columns for sales made on '2022-11-05'.
 
 '''Select * from retail_sales
 Where sale_date = '2022-11-05';'''
+
 
 Que 2.Retrieve all transactions where the category is 'Clothing' and quantity sold is more than 4 in Nov-2022.
 
@@ -172,6 +195,7 @@ WHERE category = 'clothing'
   AND Quantity >= 4
 LIMIT 0, 1000;'''
 
+
 Que 3. Calculate the total sales and total orders for each category.
 
 '''Select
@@ -181,6 +205,7 @@ Que 3. Calculate the total sales and total orders for each category.
 from retail_sales
 group by category;'''
 
+
 Que 4. Find the average age of customers who purchased items from the 'Beauty' category.
 
 '''Select
@@ -188,10 +213,12 @@ Que 4. Find the average age of customers who purchased items from the 'Beauty' c
 from retail_sales
 where category = 'beauty';'''
 
+
 Que 5. Find all transactions where the total_sale is greater than 1000.
 
 '''Select * from retail_sales
 Where total_sales > 1000;'''
+
 
 Que 6. Find the total number of transactions made by each gender in each category.
 
@@ -204,6 +231,7 @@ group by
     category,
     gender
 order by category;'''
+
 
 Que 7.Calculate the average sale for each month and find the best-selling month in each year.
 
@@ -221,6 +249,7 @@ from (
 ) as T1
 Where ranking = 1
 ORDER BY Year, Avg_sale DESC;'''
+
 
 Que 8. Find the top 5 customers based on the highest total sales.
 
@@ -258,6 +287,7 @@ WHERE
 ORDER BY
     customer_rank;'''
 
+
 Que 9. Find the number of unique customers who purchased items from each category.
 
 '''Select
@@ -265,6 +295,7 @@ Que 9. Find the number of unique customers who purchased items from each categor
     count(Distinct customer_id) as Unique_Customer
 from retail_sales
 GROUP BY Category;'''
+
 
 Que 10. Categorize sales into shifts (Morning, Afternoon, Evening) and count total orders per shift.
 
@@ -284,6 +315,7 @@ Select
     Count(*) as total_orders
 from hourly_sale
 Group by shifts;'''
+
 
 **Contributing**
 Feel free to use this repository, make improvements, and submit pull requests. Any contributions are welcome!
